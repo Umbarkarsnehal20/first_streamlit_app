@@ -52,7 +52,7 @@ try:
     streamlit.dataframe(back_from_function)
     
 except URLerror as e:
-     streamlit.stop();
+     
 
 # import snowflake.connector
 # my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
