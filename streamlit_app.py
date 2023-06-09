@@ -52,6 +52,17 @@ try:
     streamlit.dataframe(back_from_function)
     
 except URLerror as e:
+ streamlit.header("The fruit load list contains:")
+#snwflake related functins
+def get_fruit_load_list():
+    with my_cnx.cursor() as my_cur:
+         my_cur.execute("SELECT * from fruit_load_list")
+         return my_cur.fetchall()
+ #add a buttn t lad a fruit
+if streamlit.button('get fruit load list'):
+    my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
+    my_data_rows = get_fruit_load_list()
+    streamlit.dataframe(my_data_rows)
      
 
 # import snowflake.connector
@@ -63,17 +74,7 @@ except URLerror as e:
 #streamlit.dataframe(my_data_rows)
 
 
-streamlit.header("The fruit load list contains:")
-#snwflake related functins
-def get_fruit_load_list():
-    with my_cnx.cursor() as my_cur:
-         my_cur.execute("SELECT * from fruit_load_list")
-         return my_cur.fetchall()
- #add a buttn t lad a fruit
-if streamlit.button('get fruit load list'):
-    my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
-    my_data_rows = get_fruit_load_list()
-    streamlit.dataframe(my_data_rows)
+
     
 fruit_choice = streamlit.text_input('What fruit would you like to add?','Kiwi')
 streamlit.write('Thanks for adding ', fruit_choice)
